@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tiny.HookTales — Handmade Crochet</title>
+<style>
+:root{
+  --pink:#e86f8f; --pink2:#f7b7c7; --cream:#fff8f3; --rose:#fff0f4;
+  --brown:#3d2925; --muted:#765f59; --white:#fff; --line:#eadbd4;
+  --shadow:0 12px 35px rgba(82,47,39,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,Segoe UI,Arial,sans-serif;background:#fff;color:var(--brown)}
+button,input,textarea{font:inherit}
+button{cursor:pointer;border:0}
+a{text-decoration:none;color:inherit}
+.container{width:min(1180px,92%);margin:auto}
+.topbar{background:linear-gradient(90deg,#3d2925,#6a3e48,#3d2925);color:#fff;padding:8px 4%;font-size:12px;letter-spacing:.5px;display:flex;align-items:center;justify-content:center;position:relative}.topbar .top-instagram{position:absolute;right:4%;display:inline-flex;align-items:center;gap:7px;padding:6px 13px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:#fff;font-weight:800;letter-spacing:.4px;box-shadow:0 4px 14px rgba(0,0,0,.12);transition:.2s}.topbar .top-instagram:hover{background:rgba(255,255,255,.2);transform:translateY(-1px)}.topbar .ig-dot{width:19px;height:19px;border:2px solid #fff;border-radius:6px;display:grid;place-items:center;font-size:11px;line-height:1}.topbar .ig-dot:after{content:"";width:4px;height:4px;border:1px solid #fff;border-radius:50%}
+.nav{height:78px;background:#fff;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f1e7e3;position:sticky;top:0;z-index:20}
+.logo{display:flex;gap:10px;align-items:center}
+.logo-mark{width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;background:#fff}
+.logo strong{font-family:Georgia,serif;font-size:22px}.logo-mark{flex:0 0 auto}
+.logo small{display:block;color:#9b827b;font-size:10px;margin-top:2px}
+.navlinks{display:flex;gap:28px;font-size:14px;font-weight:700}
+.navlinks a{position:relative}
+.navlinks a:hover,.navlinks a.active{color:var(--pink)}
+.navlinks a.active:after{content:"";position:absolute;left:0;right:0;bottom:-10px;height:2px;background:var(--pink)}
+.navright{display:flex;align-items:center;gap:12px}
+.search{width:205px;border:1px solid var(--line);border-radius:25px;padding:10px 15px;outline:none}
+.iconbtn{background:#fff;border:1px solid var(--line);width:42px;height:42px;border-radius:50%;position:relative}
+.badge{position:absolute;right:-2px;top:-4px;background:#b51e4a;color:#fff;font-size:10px;width:17px;height:17px;border-radius:50%;display:grid;place-items:center}
+.hero{background:linear-gradient(110deg,#fff1e7,#ffe3df 48%,#fff6ef);overflow:hidden}
+.hero-inner{min-height:390px;display:grid;grid-template-columns:40% 60%;align-items:center}
+.hero-copy{padding:45px 0;position:relative;z-index:2}
+.eyebrow{color:var(--pink);font-weight:800;letter-spacing:2px;text-transform:uppercase;font-size:12px}
+.hero h1{font-family:Georgia,serif;font-size:54px;line-height:1.02;margin:14px 0;color:#422c28}
+.hero h1 span{color:var(--pink)}
+.hero p{color:var(--muted);max-width:430px;line-height:1.7}
+.btn{background:var(--pink);color:#fff;padding:13px 22px;border-radius:25px;font-weight:800;box-shadow:0 8px 20px rgba(232,111,143,.25);transition:.2s}
+.btn:hover{transform:translateY(-2px)}
+.hero-img{height:390px;background-size:cover;background-position:center;border-radius:50% 0 0 50%;box-shadow:inset 0 0 70px rgba(255,255,255,.25)}
+.categories{background:#fff7f6;padding:25px 0;border-bottom:1px solid #f2e6e2}
+.catrow{display:grid;grid-template-columns:repeat(6,1fr);gap:15px}
+.cat{padding:10px;text-align:center;border-radius:18px;transition:.2s;border:0;background:transparent;color:inherit;width:100%}
+.cat:hover{background:#fff;box-shadow:var(--shadow);transform:translateY(-3px)}
+.caticon{width:58px;height:58px;background:#ffe3e8;border-radius:50%;display:grid;place-items:center;margin:auto;font-size:25px}
+.cat b{display:block;font-size:13px;margin-top:8px}.cat small{color:#9a8179}
+.section{padding:45px 0}
+.sectionhead{display:flex;justify-content:space-between;align-items:end;margin-bottom:22px}
+.sectionhead h2{font-family:Georgia,serif;font-size:28px}
+.sectionhead p{color:#8a736d;font-size:13px;margin-top:5px}
+.linkbtn{border:1px solid #e9b0be;color:#c55374;padding:9px 16px;border-radius:20px;background:#fff}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{border:1px solid var(--line);border-radius:16px;padding:9px;background:#fff;box-shadow:0 4px 15px rgba(72,45,39,.04);overflow:hidden}
+.photo{height:210px;border-radius:11px;background:#f5eee9 center/cover no-repeat;position:relative}
+.heart{position:absolute;right:9px;top:9px;width:31px;height:31px;border-radius:50%;background:#fff;display:grid;place-items:center;color:#d96584;box-shadow:0 3px 10px #0001}
+.card h3{font-size:14px;margin:11px 4px 5px}.price{font-weight:900;margin:0 4px 10px}.add{width:100%;padding:10px;background:var(--pink);color:#fff;border-radius:8px;font-weight:800;font-size:12px}
+.story{background:#fff3ef;padding:48px 0}.storygrid{display:grid;grid-template-columns:1fr 1.2fr;gap:35px;align-items:center}
+.storyimg{height:280px;border-radius:22px;background:url('https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=1000&q=80') center/cover;box-shadow:var(--shadow)}
+.story h2{font-family:Georgia,serif;font-size:34px}.story p{line-height:1.8;color:var(--muted);margin:12px 0 20px}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:25px}.feature{padding:18px;background:#fff;border-radius:15px}.feature b{display:block;margin:7px 0;font-size:13px}.feature span{font-size:12px;color:#8b736d}
+.footer{background:#30221f;color:#fff;padding:38px 0 18px}.footgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:30px}.footer p,.footer a{color:#cdbdb8;font-size:12px;line-height:1.8}.footer h4{margin-bottom:10px}.socials{display:flex;gap:8px}.socials a{width:34px;height:34px;background:#ffffff12;border-radius:50%;display:grid;place-items:center}
+.copy{border-top:1px solid #ffffff1a;margin-top:25px;padding-top:15px;color:#aa9993;font-size:11px;display:flex;justify-content:space-between}
+
+/* ADMIN */
+.admin-overlay{display:none;position:fixed;inset:0;background:#0008;z-index:100;overflow:auto;padding:25px}
+.admin{width:min(1050px,100%);margin:auto;background:#fff;border-radius:22px;box-shadow:0 25px 80px #0005;overflow:hidden}
+.admin-head{padding:20px 25px;background:#3d2925;color:#fff;display:flex;justify-content:space-between;align-items:center}
+.admin-head h2{font-family:Georgia,serif}.close{background:#ffffff1a;color:#fff;width:38px;height:38px;border-radius:50%}
+.admin-body{padding:25px}.admin-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}.tab{padding:10px 15px;border-radius:20px;background:#f6eeee}.tab.active{background:var(--pink);color:#fff}
+.panel{display:none}.panel.active{display:block}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field label{display:block;font-size:12px;font-weight:800;margin-bottom:6px}.field input,.field textarea,.field select{width:100%;padding:11px;border:1px solid #ddd0cb;border-radius:9px;outline:none}.field textarea{min-height:90px;resize:vertical}.full{grid-column:1/-1}
+.admin-products{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}.admin-product{border:1px solid #eadbd4;border-radius:12px;padding:10px}.admin-product img{width:100%;height:130px;object-fit:cover;border-radius:8px}.admin-actions{display:flex;gap:6px;margin-top:8px}.admin-card-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 4px 3px}.edit-card-btn,.delete-card-btn{padding:10px;border-radius:8px;font-size:12px;font-weight:800}.edit-card-btn{background:#fff0f4;color:#b34c6a;border:1px solid #efb7c7}.delete-card-btn{background:#3d2925;color:#fff}.smallbtn{padding:8px 10px;border-radius:8px;background:#f5e8e9;font-size:11px}.smallbtn.danger{background:#ffe1e5;color:#a51f42}.save{margin-top:15px}
+.edit-modal{display:none;position:fixed;inset:0;background:#0008;z-index:150;align-items:center;justify-content:center;padding:20px}.edit-box{width:min(620px,100%);background:#fff;border-radius:20px;box-shadow:0 25px 80px #0006;overflow:hidden}.edit-head{background:#3d2925;color:#fff;padding:18px 22px;display:flex;justify-content:space-between;align-items:center}.edit-head h3{font-family:Georgia,serif}.edit-body{padding:22px}.edit-image-preview{width:180px;height:150px;border-radius:12px;object-fit:cover;border:1px solid #eadbd4;background:#f5eee9;display:block;margin-bottom:10px}.edit-buttons{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}.cancel-btn{padding:11px 18px;border-radius:22px;background:#f3e8e5;color:#5b413a;font-weight:800}.save-edit-btn{padding:11px 18px;border-radius:22px;background:var(--pink);color:#fff;font-weight:800}
+#toast{position:fixed;right:20px;bottom:20px;background:#3d2925;color:#fff;padding:12px 17px;border-radius:10px;display:none;z-index:200}
+@media(max-width:900px){.navlinks{display:none}.hero-inner{grid-template-columns:1fr}.hero-img{height:260px;border-radius:0}.hero h1{font-size:42px}.catrow{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:repeat(2,1fr)}.footgrid{grid-template-columns:1fr 1fr}.admin-products{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.topbar{padding-right:150px}.topbar .top-instagram{right:10px;padding:5px 9px;font-size:10px}.search{display:none}.grid{grid-template-columns:1fr 1fr;gap:10px}.photo{height:160px}.features{grid-template-columns:1fr 1fr}.storygrid{grid-template-columns:1fr}.footgrid{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.full{grid-column:auto}.admin-products{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="topbar"><span>♡ Handmade with love · Free delivery on selected orders</span><a class="top-instagram" id="topInstagramLink" target="_blank" href="https://instagram.com/tiny.hooktales"><span class="ig-dot">•</span><span id="topInstagramText">@tiny.hooktales</span></a></div>
+
+<nav class="nav">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:20px">
+    <a class="logo" href="#home">
+      <img class="logo-mark" src="data:image/jpeg;base64,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" alt="tiny.hooktales logo">
+      <div><strong id="brandName">tiny.hooktales</strong><small>Small hooks ✦ Big happiness</small></div>
+    </a>
+    <div class="navlinks">
+      <a class="active" href="#home">Home</a>
+      <a href="#adminArea" onclick="openAdmin();return false;">Admin Dashboard</a>
+      <a href="#categories">Categories</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="navright">
+      <input class="search" id="search" placeholder="Search products...">
+      <button class="btn" style="padding:10px 16px" onclick="openAdmin()">⚙ Admin</button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <div class="eyebrow">Handmade · Unique · Loved</div>
+      <h1>Handmade Crochet<br><span>with Love ♡</span></h1>
+      <p>This is the company admin page. Manage your crochet products, prices, photos and shop contact details from here.</p>
+      <br><a class="btn" href="#shop">Shop Now →</a>
+    </div>
+    <div class="hero-img" id="heroImage"></div>
+  </div>
+</section>
+
+<section class="categories" id="categories">
+  <div class="container catrow">
+    <button class="cat" onclick="filterCategory('Bags')"><div class="caticon">👜</div><b>Bags</b><small>Stylish & Unique</small></button>
+    <button class="cat" onclick="filterCategory('Plushies')"><div class="caticon">🧸</div><b>Plushies</b><small>Cuddly Friends</small></button>
+    <button class="cat" onclick="filterCategory('Flowers')"><div class="caticon">🌼</div><b>Flowers</b><small>Blooming Beauty</small></button>
+    <button class="cat" onclick="filterCategory('Accessories')"><div class="caticon">🎀</div><b>Accessories</b><small>Little Details</small></button>
+    <button class="cat" onclick="filterCategory('Baby')"><div class="caticon">👶</div><b>Baby</b><small>For Little Ones</small></button>
+    <button class="cat" onclick="filterCategory('All')"><div class="caticon">▦</div><b>All Products</b><small>View All</small></button>
+  </div>
+</section>
+
+<section class="section" id="shop">
+  <div class="container">
+    <div class="sectionhead"><div><h2>⚙ Product Management</h2><p>Admin-only product management — add, edit, delete and update products.</p></div><button class="linkbtn" onclick="filterCategory('All')">View All Products →</button></div>
+    <div id="filterLabel" style="font-size:13px;color:#a05f70;font-weight:800;margin:0 0 14px">Showing: All Products</div><div class="grid" id="products"></div>
+  </div>
+</section>
+
+<section class="story" id="about">
+  <div class="container storygrid">
+    <div class="storyimg" id="storyImage"></div>
+    <div>
+      <h2>Our Story ♡</h2>
+      <p id="storyText">tiny.hooktales started with a simple dream — to turn yarn and imagination into something special. Every piece is handmade with love, care and a lot of patience.</p>
+      <a class="btn" href="#contact">Learn More →</a>
+      <div class="features">
+        <div class="feature">🚚<b>Fast & Safe Delivery</b><span>Your happiness, our priority</span></div>
+        <div class="feature">♡<b>Handmade with Love</b><span>Every piece is unique</span></div>
+        <div class="feature">🛡<b>Secure Payments</b><span>Shop with confidence</span></div>
+        <div class="feature">🌿<b>Eco Friendly</b><span>Because we care</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" id="contact">
+  <div class="container">
+    <div class="footgrid">
+      <div><div class="logo"><img class="logo-mark" src="data:image/jpeg;base64,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" alt="tiny.hooktales logo"><div><strong style="color:#fff" id="footerBrand">tiny.hooktales</strong><small>Small hooks ✦ Big happiness</small></div></div><p style="margin-top:12px">Beautiful handmade crochet gifts for every little moment.</p></div>
+      <div><h4>Quick Links</h4><p><a href="#home">Home</a><br><a href="#categories">Categories</a><br><a href="#about">About</a><br><a href="#contact">Contact</a></p></div>
+      <div><h4>Follow Us</h4><div class="socials"><a id="instaLink" target="_blank">◎</a><a id="waLink" target="_blank">◉</a><a href="#">f</a><a href="#">▶</a></div><p id="instaText" style="margin-top:8px">@tiny.hooktales</p></div>
+      <div><h4>Get in Touch</h4><p>📱 <span id="phoneText">+91 79072 50445</span></p><p>💬 <span id="waText">+91 79072 50445</span></p><p>✉ <a id="emailLink" href="mailto:nadhanpk@gmail.com"><span id="emailText">nadhanpk@gmail.com</span></a></p></div>
+    </div>
+    <div class="copy"><span>© 2026 tiny.hooktales. All rights reserved.</span><span>Made with ♡</span></div>
+  </div>
+</footer>
+
+<!-- ADMIN DASHBOARD -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin">
+    <div class="admin-head"><div><h2>Admin Dashboard</h2><small>Company control panel · Products · Prices · Photos · Contact details</small></div><button class="close" onclick="closeAdmin()">✕</button></div>
+    <div class="admin-body">
+      <div class="admin-tabs">
+        <button class="tab active" data-tab="productsPanel">Products</button>
+        <button class="tab" data-tab="addPanel">Add Product</button>
+        <button class="tab" data-tab="settingsPanel">Shop Settings</button>
+      </div>
+
+      <div class="panel active" id="productsPanel">
+        <p style="color:#765f59;font-size:13px">Admin controls: edit name, price, category and image; add or delete products. Changes are saved in this browser.</p>
+        <div class="admin-products" id="adminProducts"></div>
+      </div>
+
+      <div class="panel" id="addPanel">
+        <div class="formgrid">
+          <div class="field"><label>Product name</label><input id="newName" placeholder="e.g. Daisy Shoulder Bag"></div>
+          <div class="field"><label>Price (₹)</label><input id="newPrice" type="number" placeholder="450"></div>
+          <div class="field"><label>Category</label><select id="newCategory"><option>Bags</option><option>Plushies</option><option>Flowers</option><option>Accessories</option><option>Baby</option></select></div>
+          <div class="field"><label>Photo</label><input id="newPhoto" type="file" accept="image/*"></div>
+          <div class="field full"><label>Description</label><textarea id="newDesc" placeholder="Short product description"></textarea></div>
+        </div>
+        <button class="btn save" onclick="addProduct()">+ Add Product</button>
+      </div>
+
+      <div class="panel" id="settingsPanel">
+        <div class="formgrid">
+          <div class="field"><label>Shop / Brand name</label><input id="setBrand"></div>
+          <div class="field"><label>Mobile number</label><input id="setPhone" placeholder="+91 98765 43210"></div>
+          <div class="field"><label>WhatsApp number</label><input id="setWhatsapp" placeholder="919876543210"></div>
+          <div class="field"><label>Instagram ID</label><input id="setInstagram" placeholder="tiny.hooktales"></div>
+          <div class="field"><label>Email ID</label><input id="setEmail" type="email" placeholder="nadhanpk@gmail.com"></div>
+          <div class="field full"><label>About / Story</label><textarea id="setStory"></textarea></div>
+          <div class="field full"><label>Hero photo</label><input id="setHero" type="file" accept="image/*"></div>
+        </div>
+        <button class="btn save" onclick="saveSettings()">Save Shop Settings</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="edit-modal" id="editModal">
+  <div class="edit-box">
+    <div class="edit-head"><div><h3>Edit Product</h3><small>Update every product detail</small></div><button class="close" onclick="closeEditModal()">✕</button></div>
+    <div class="edit-body">
+      <div class="formgrid">
+        <div class="field"><label>Product name</label><input id="editName"></div>
+        <div class="field"><label>Price (₹)</label><input id="editPrice" type="number" min="0"></div>
+        <div class="field"><label>Category</label><select id="editCategory"><option>Bags</option><option>Plushies</option><option>Flowers</option><option>Accessories</option><option>Baby</option></select></div>
+        <div class="field"><label>Change photo</label><input id="editPhoto" type="file" accept="image/*"></div>
+        <div class="field full"><label>Current / new photo preview</label><img id="editPreview" class="edit-image-preview" alt="Product preview"></div>
+        <div class="field full"><label>Description</label><textarea id="editDesc"></textarea></div>
+      </div>
+      <div class="edit-buttons"><button class="cancel-btn" onclick="closeEditModal()">Cancel</button><button class="save-edit-btn" onclick="saveEditedProduct()">Save Changes</button></div>
+    </div>
+  </div>
+</div>
+<div id="toast"></div>
+
+<script>
+let products=[];
+let settings=JSON.parse(localStorage.getItem("crochetSettings")||"null")||{
+ brand:"tiny.hooktales",phone:"+91 79072 50445",whatsapp:"917907250445",instagram:"tiny.hooktales",email:"nadhanpk@gmail.com",
+ story:"tiny.hooktales started with a simple dream — to turn yarn and imagination into something special. Every piece is handmade with love, care and a lot of patience."
+};
+let cart=Number(localStorage.getItem("crochetCart")||0);
+if(settings.phone==="+91 98765 43210" || !settings.phone) settings.phone="+91 79072 50445";
+if(!settings.whatsapp || settings.whatsapp==="919876543210") settings.whatsapp="917907250445";
+if(!settings.instagram) settings.instagram="tiny.hooktales";
+if(!settings.email || settings.email==="hello@tinyhooktales.com") settings.email="nadhanpk@gmail.com";
+
+function getCookie(name){
+ const value=`; ${document.cookie}`; const parts=value.split(`; ${name}=`);
+ if(parts.length===2) return parts.pop().split(';').shift();
+ return '';
+}
+
+async function fetchProducts(){
+ const resp=await fetch('/dashboard/api/products/');
+ const data=await resp.json();
+ products=data.products||[];
+ renderProducts();
+ renderAdmin();
+}
+
+async function apiProducts(payload){
+ const response=await fetch('/dashboard/api/products/',{
+  method:'POST',
+  headers:{'Content-Type':'application/json','X-CSRFToken':getCookie('csrftoken')},
+  body:JSON.stringify(payload)
+ });
+ const result=await response.json();
+ if(!response.ok){throw new Error(result.error||'Request failed');}
+ await fetchProducts();
+ return result;
+}
+
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.style.display="block";setTimeout(()=>t.style.display="none",1800)}
+function renderProducts(){
+ const q=document.getElementById("search").value.toLowerCase();
+ const current=window.activeCategory||"All";
+ const filtered=products.filter(p=>{
+   const matchesCategory=current==="All"||p.category===current;
+   const matchesSearch=(p.name||'').toLowerCase().includes(q)||(p.category||'').toLowerCase().includes(q);
+   return matchesCategory&&matchesSearch;
+ });
+ document.getElementById("filterLabel").textContent="Showing: "+current+(q?" · Search: "+q:"");
+ document.getElementById("products").innerHTML=filtered.length?filtered.map(p=>`
+ <article class="card">
+   <div class="photo" style="background-image:url('${p.img}')"></div>
+   <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;margin:11px 4px 5px">
+     <h3 style="margin:0">${escapeHtml(p.name)}</h3>
+     <span style="font-size:10px;background:#fff0f4;color:#b34c6a;padding:5px 8px;border-radius:12px">${escapeHtml(p.category)}</span>
+   </div>
+   <div class="price">₹${p.price}</div>
+   <div class="admin-card-actions">
+     <button type="button" class="edit-card-btn" data-action="edit" data-id="${p.id}">✏ Edit</button>
+     <button type="button" class="delete-card-btn" data-action="delete" data-id="${p.id}">🗑 Delete</button>
+   </div>
+ </article>`).join(""):`<div style="grid-column:1/-1;padding:45px;text-align:center;border:1px dashed #e2c9c0;border-radius:16px;color:#8b736d">No products found in this category.</div>`;
+}
+function escapeHtml(value){
+ return String(value).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+}
+function filterCategory(category){
+ window.activeCategory=category;
+ document.getElementById("search").value="";
+ renderProducts();
+ document.getElementById("shop").scrollIntoView({behavior:"smooth"});
+}
+let editingProductId=null;
+function openEditModal(id){
+ const p=products.find(x=>x.id===id);
+ if(!p){toast("Product not found");return}
+ editingProductId=id;
+ document.getElementById("editName").value=p.name||"";
+ document.getElementById("editPrice").value=p.price??"";
+ document.getElementById("editCategory").value=p.category||"Bags";
+ document.getElementById("editDesc").value=p.description||"";
+ document.getElementById("editPhoto").value="";
+ document.getElementById("editPreview").src=p.img||"";
+ document.getElementById("editModal").style.display="flex";
+}
+function closeEditModal(){editingProductId=null;document.getElementById("editModal").style.display="none"}
+document.getElementById("editPhoto").addEventListener("change",function(){
+ const file=this.files[0]; if(!file)return;
+ const reader=new FileReader(); reader.onload=()=>document.getElementById("editPreview").src=reader.result; reader.readAsDataURL(file);
+});
+async function saveEditedProduct(){
+ const p=products.find(x=>x.id===editingProductId);
+ if(!p){closeEditModal();return}
+ const name=document.getElementById("editName").value.trim();
+ const price=Number(document.getElementById("editPrice").value);
+ const category=document.getElementById("editCategory").value;
+ const desc=document.getElementById("editDesc").value.trim();
+ if(!name){toast("Enter a product name");return}
+ if(!Number.isFinite(price)||price<0){toast("Enter a valid price");return}
+ const file=document.getElementById("editPhoto").files[0];
+ const payload={action:'update',id:editingProductId,name,price,category,description:desc};
+ if(file){
+   const reader=new FileReader();
+   reader.onload=async()=>{
+     payload.img=reader.result;
+     await apiProducts(payload);
+     closeEditModal();
+     toast("Product updated successfully ♡");
+   };
+   reader.readAsDataURL(file);
+   return;
+ }
+ await apiProducts(payload);
+ closeEditModal();
+ toast("Product updated successfully ♡");
+}
+async function deleteProduct(id){
+ const numericId=Number(id);
+ const product=products.find(x=>Number(x.id)===numericId);
+ if(!product){toast("Product not found");return;}
+ if(!window.confirm('Delete "'+product.name+'" from the product list?'))return;
+ await apiProducts({action:'delete',id:numericId});
+ toast('"'+product.name+'" deleted successfully');
+}
+document.getElementById("products").addEventListener("click",function(e){
+ const btn=e.target.closest("button[data-action]");
+ if(!btn)return;
+ const id=Number(btn.dataset.id);
+ if(btn.dataset.action==="delete") deleteProduct(id);
+ if(btn.dataset.action==="edit") openEditModal(id);
+});
+
+function addCart(){ toast("Cart is disabled on the admin page"); }
+
+function openAdmin(){
+ document.getElementById("adminOverlay").style.display="block";
+ document.getElementById("setBrand").value=settings.brand;document.getElementById("setPhone").value=settings.phone;
+ document.getElementById("setWhatsapp").value=settings.whatsapp;document.getElementById("setInstagram").value=settings.instagram;document.getElementById("setEmail").value=settings.email||"nadhanpk@gmail.com";document.getElementById("setStory").value=settings.story;
+ renderAdmin();
+}
+function closeAdmin(){document.getElementById("adminOverlay").style.display="none"}
+function renderAdmin(){
+ const box=document.getElementById("adminProducts");
+ if(!box)return;
+ box.innerHTML=products.map(p=>`
+ <div class="admin-product" data-product-id="${p.id}">
+   <img src="${p.img}" alt="${escapeHtml(p.name)}">
+   <b>${escapeHtml(p.name)}</b>
+   <div style="font-size:12px;color:#765f59;margin-top:4px">₹${p.price} · ${escapeHtml(p.category)}</div>
+   <div class="admin-actions">
+     <button type="button" class="smallbtn" data-action="edit" data-id="${p.id}">Edit</button>
+     <button type="button" class="smallbtn danger" data-action="delete" data-id="${p.id}">Delete</button>
+   </div>
+ </div>`).join("");
+}
+
+document.getElementById("adminProducts").addEventListener("click",function(e){
+ const btn=e.target.closest("button[data-action]");
+ if(!btn)return;
+ const id=Number(btn.dataset.id);
+ if(btn.dataset.action==="delete") deleteProduct(id);
+ if(btn.dataset.action==="edit") openEditModal(id);
+});
+
+async function addProduct(){
+ const name=document.getElementById("newName").value.trim(),price=Number(document.getElementById("newPrice").value);
+ const category=document.getElementById("newCategory").value,desc=document.getElementById("newDesc").value;
+ const file=document.getElementById("newPhoto").files[0];
+ if(!name||!price){toast("Enter product name and price");return}
+ const payload={action:'add',name,price,category,description:desc};
+ if(file){
+   const reader=new FileReader();
+   reader.onload=async()=>{
+     payload.img=reader.result;
+     await apiProducts(payload);
+     document.getElementById("newName").value="";document.getElementById("newPrice").value="";document.getElementById("newDesc").value="";document.getElementById("newPhoto").value="";toast("Product added ♡");
+   };
+   reader.readAsDataURL(file);
+   return;
+ }
+ await apiProducts(payload);
+ document.getElementById("newName").value="";document.getElementById("newPrice").value="";document.getElementById("newDesc").value="";document.getElementById("newPhoto").value="";toast("Product added ♡");
+}
+function saveSettings(){
+ settings.brand=document.getElementById("setBrand").value||"tiny.hooktales";settings.phone=document.getElementById("setPhone").value;
+ settings.whatsapp=document.getElementById("setWhatsapp").value.replace(/\D/g,"");settings.instagram=document.getElementById("setInstagram").value.replace("@","");settings.email=document.getElementById("setEmail").value.trim();
+ settings.story=document.getElementById("setStory").value;localStorage.setItem("crochetSettings",JSON.stringify(settings));applySettings();toast("Shop settings saved ♡");
+}
+function applySettings(){
+ document.getElementById("brandName").textContent=settings.brand;document.getElementById("footerBrand").textContent=settings.brand;
+ document.getElementById("phoneText").textContent=settings.phone;document.getElementById("waText").textContent=settings.whatsapp;
+ document.getElementById("instaText").textContent="@"+settings.instagram;document.getElementById("topInstagramText").textContent="@"+settings.instagram;document.getElementById("topInstagramLink").href="https://instagram.com/"+settings.instagram;document.getElementById("emailText").textContent=settings.email||"";document.getElementById("emailLink").href="mailto:"+(settings.email||"");document.getElementById("storyText").textContent=settings.story;
+ document.getElementById("waLink").href="https://wa.me/"+settings.whatsapp;document.getElementById("instaLink").href="https://instagram.com/"+settings.instagram;
+}
+document.querySelectorAll(".tab").forEach(btn=>btn.onclick=()=>{document.querySelectorAll(".tab,.panel").forEach(x=>x.classList.remove("active"));btn.classList.add("active");document.getElementById(btn.dataset.tab).classList.add("active")});
+document.getElementById("search").addEventListener("input",renderProducts);
+document.getElementById("heroImage").style.backgroundImage="url('https://images.unsplash.com/photo-1583845112203-454c5e7a4c7a?auto=format&fit=crop&w=1200&q=85')";
+window.activeCategory="All";applySettings();fetchProducts();
+</script>
+</body>
+</html>
